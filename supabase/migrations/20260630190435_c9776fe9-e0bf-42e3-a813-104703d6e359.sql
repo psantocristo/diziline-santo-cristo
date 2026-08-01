@@ -1,0 +1,1 @@
+ALTER TABLE public.configuracoes_paroquia ADD COLUMN IF NOT EXISTS logo_carteirinha_url TEXT;

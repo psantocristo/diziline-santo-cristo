@@ -1,0 +1,1 @@
+ALTER TABLE public.pagamentos ADD COLUMN IF NOT EXISTS cpf_contribuinte text;

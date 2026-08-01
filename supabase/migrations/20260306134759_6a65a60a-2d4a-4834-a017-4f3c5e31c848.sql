@@ -1,0 +1,1 @@
+ALTER TABLE public.servos ADD COLUMN comunidade_id uuid REFERENCES public.comunidades(id) ON DELETE SET NULL DEFAULT NULL;
