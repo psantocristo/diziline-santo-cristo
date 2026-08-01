@@ -1,0 +1,17 @@
+{
+  "name": "sicredi-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proxy mTLS (Cloudflare Worker) para a API PIX do Sicredi",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:homolog": "wrangler deploy --env homolog",
+    "secret": "wrangler secret put PROXY_SECRET"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250101.0",
+    "typescript": "^5.6.0",
+    "wrangler": "^3.90.0"
+  }
+}

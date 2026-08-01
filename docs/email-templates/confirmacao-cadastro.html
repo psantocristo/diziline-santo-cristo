@@ -1,0 +1,134 @@
+<!--
+  Template: Confirmação de Cadastro (Supabase Auth)
+  Onde colar: Supabase Dashboard → Authentication → Email Templates → "Confirm signup"
+  Assunto sugerido: Confirme seu e-mail — {{ .SiteURL }}
+
+  Variáveis Supabase disponíveis:
+    {{ .ConfirmationURL }}  → link de confirmação (obrigatório)
+    {{ .Email }}             → e-mail do destinatário
+    {{ .SiteURL }}           → URL do site configurada no projeto
+    {{ .Token }}             → código OTP (opcional)
+    {{ .TokenHash }}         → hash do token (opcional)
+
+  Compatível com Gmail, Outlook, Apple Mail, iOS/Android.
+  Tabelas + estilos inline (padrão HTML-email).
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <title>Confirme seu e-mail</title>
+    <!--[if mso]>
+      <style type="text/css">
+        table, td, div, h1, p { font-family: Arial, Helvetica, sans-serif !important; }
+      </style>
+    <![endif]-->
+    <style>
+      @media only screen and (max-width: 620px) {
+        .container { width: 100% !important; padding: 0 16px !important; }
+        .content   { padding: 24px !important; }
+        .btn a     { display: block !important; width: 100% !important; box-sizing: border-box; }
+        h1         { font-size: 22px !important; line-height: 1.3 !important; }
+      }
+    </style>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f4f6f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1f2937;">
+    <!-- Preheader (aparece na prévia do inbox, invisível no corpo) -->
+    <div style="display:none;font-size:1px;color:#f4f6f9;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+      Confirme seu e-mail para ativar seu cadastro de dizimista.
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f6f9;">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(15,23,42,0.06);">
+
+            <!-- Header / Brasão -->
+            <tr>
+              <td align="center" style="background:linear-gradient(135deg,#1e3a8a 0%,#0f172a 100%);padding:32px 24px;">
+                <!-- Substitua pelo logo da paróquia (URL pública, ex.: bucket avatares/logos) -->
+                <img src="{{ .SiteURL }}/icon-512.png" alt="Logo" width="72" height="72" style="display:block;border:0;outline:none;text-decoration:none;border-radius:12px;background:#ffffff;padding:6px;" />
+                <h1 style="margin:16px 0 0;color:#ffffff;font-size:22px;font-weight:600;letter-spacing:.2px;">
+                  Confirme seu e-mail
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Conteúdo -->
+            <tr>
+              <td class="content" style="padding:36px 40px 16px;">
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#1f2937;">
+                  Olá,
+                </p>
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#374151;">
+                  Recebemos seu cadastro no sistema de dízimos da paróquia. Para ativar sua conta e acessar sua área do dizimista, confirme seu endereço de e-mail clicando no botão abaixo:
+                </p>
+
+                <!-- Botão CTA -->
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:28px auto;">
+                  <tr>
+                    <td align="center" class="btn" bgcolor="#1e3a8a" style="border-radius:10px;">
+                      <a href="{{ .ConfirmationURL }}"
+                         style="display:inline-block;padding:14px 32px;font-size:16px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:10px;background:#1e3a8a;">
+                        Confirmar meu e-mail
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin:0 0 12px;font-size:14px;line-height:1.6;color:#6b7280;">
+                  Se o botão não funcionar, copie e cole este link no seu navegador:
+                </p>
+                <p style="margin:0 0 24px;font-size:13px;line-height:1.5;word-break:break-all;">
+                  <a href="{{ .ConfirmationURL }}" style="color:#1e3a8a;text-decoration:underline;">{{ .ConfirmationURL }}</a>
+                </p>
+
+                <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;" />
+
+                <p style="margin:0 0 8px;font-size:13px;line-height:1.6;color:#6b7280;">
+                  🔒 Este link é pessoal e expira em <strong>24 horas</strong>. Se você não solicitou este cadastro, pode ignorar este e-mail — nenhuma conta será ativada sem sua confirmação.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Versículo / Mensagem pastoral (opcional) -->
+            <tr>
+              <td style="padding:8px 40px 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f9fafb;border-left:3px solid #1e3a8a;border-radius:6px;">
+                  <tr>
+                    <td style="padding:16px 20px;">
+                      <p style="margin:0;font-size:14px;line-height:1.6;color:#374151;font-style:italic;">
+                        “Cada um dê conforme decidiu no coração, sem tristeza nem constrangimento; pois Deus ama quem dá com alegria.”
+                      </p>
+                      <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">— 2 Coríntios 9,7</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td align="center" style="background:#f9fafb;padding:24px 24px 28px;border-top:1px solid #eef2f7;">
+                <p style="margin:0 0 6px;font-size:12px;color:#6b7280;">
+                  Este é um e-mail automático — por favor, não responda.
+                </p>
+                <p style="margin:0;font-size:12px;color:#9ca3af;">
+                  © <span>{{ now.Year }}</span> — Sistema de Dízimos Paroquial
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <p style="margin:16px 0 0;font-size:11px;color:#9ca3af;">
+            Enviado para {{ .Email }}
+          </p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

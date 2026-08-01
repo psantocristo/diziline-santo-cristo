@@ -1,0 +1,23 @@
+name = "sicredi-proxy"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+# Produção (padrão)
+[vars]
+SICREDI_HOST = "https://api-pix.sicredi.com.br"
+
+[[mtls_certificates]]
+binding = "SICREDI_CERT"
+certificate_id = "COLE_AQUI_O_CERTIFICATE_ID"   # SSL/TLS → Client Certificates → mTLS Certificates
+
+# ─── Homologação ─────────────────────────────────────────────
+# Deploy com:  npx wrangler deploy --env homolog
+[env.homolog]
+name = "sicredi-proxy-homolog"
+
+[env.homolog.vars]
+SICREDI_HOST = "https://api-pix-h.sicredi.com.br"
+
+[[env.homolog.mtls_certificates]]
+binding = "SICREDI_CERT"
+certificate_id = "COLE_AQUI_O_CERTIFICATE_ID_HOMOLOG"
