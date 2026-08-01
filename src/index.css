@@ -1,0 +1,284 @@
+#lovable-badge {
+  display: none !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Paleta Dízimo Santo Cristo — Dourado + Vinho */
+    --background: 40 30% 97%;
+    --foreground: 350 40% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 350 40% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 350 40% 12%;
+
+    /* Dourado principal */
+    --primary: 40 55% 54%;
+    --primary-foreground: 350 50% 10%;
+
+    /* Vinho secundário */
+    --secondary: 350 60% 28%;
+    --secondary-foreground: 40 60% 95%;
+
+    --muted: 40 20% 92%;
+    --muted-foreground: 350 20% 45%;
+
+    --accent: 40 55% 92%;
+    --accent-foreground: 350 50% 20%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 40 25% 85%;
+    --input: 40 25% 88%;
+    --ring: 40 55% 54%;
+
+    --radius: 0.75rem;
+
+    /* Dourado vivo para detalhes */
+    --gold: 40 75% 50%;
+    --gold-light: 43 90% 85%;
+    --gold-dark: 38 65% 35%;
+
+    /* Vinho */
+    --wine: 350 65% 26%;
+    --wine-light: 350 50% 92%;
+    --wine-dark: 350 70% 18%;
+
+    /* Cores sólidas (sem degradê) */
+    --gradient-hero: hsl(350 65% 22%);
+    --gradient-gold: hsl(43 75% 58%);
+    --gradient-card: hsl(0 0% 100%);
+
+    /* Sombras */
+    --shadow-gold: 0 4px 20px -4px hsl(40 75% 50% / 0.4);
+    --shadow-wine: 0 4px 20px -4px hsl(350 65% 26% / 0.3);
+    --shadow-card: 0 2px 12px -2px hsl(350 40% 12% / 0.08);
+    --shadow-lg: 0 8px 30px -6px hsl(350 40% 12% / 0.15);
+
+    /* Sidebar */
+    --sidebar-background: 350 65% 22%;
+    --sidebar-foreground: 40 60% 92%;
+    --sidebar-primary: 40 75% 58%;
+    --sidebar-primary-foreground: 350 50% 10%;
+    --sidebar-accent: 350 50% 30%;
+    --sidebar-accent-foreground: 40 60% 92%;
+    --sidebar-border: 350 50% 28%;
+    --sidebar-ring: 40 75% 58%;
+  }
+
+  .dark {
+    --background: 350 40% 8%;
+    --foreground: 40 30% 92%;
+    --card: 350 35% 12%;
+    --card-foreground: 40 30% 92%;
+    --popover: 350 35% 12%;
+    --popover-foreground: 40 30% 92%;
+    --primary: 40 70% 60%;
+    --primary-foreground: 350 50% 10%;
+    --secondary: 350 45% 35%;
+    --secondary-foreground: 40 60% 95%;
+    --muted: 350 30% 18%;
+    --muted-foreground: 40 20% 60%;
+    --accent: 350 30% 20%;
+    --accent-foreground: 40 60% 90%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 350 30% 22%;
+    --input: 350 30% 20%;
+    --ring: 40 70% 60%;
+    --sidebar-background: 350 50% 10%;
+    --sidebar-foreground: 40 50% 90%;
+    --sidebar-primary: 40 70% 58%;
+    --sidebar-primary-foreground: 350 50% 10%;
+    --sidebar-accent: 350 40% 18%;
+    --sidebar-accent-foreground: 40 50% 90%;
+    --sidebar-border: 350 40% 16%;
+    --sidebar-ring: 40 70% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+}
+
+@layer utilities {
+  .font-sans-system {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .bg-gradient-hero {
+    background-color: var(--gradient-hero);
+  }
+
+  .bg-gradient-gold {
+    background-color: var(--gradient-gold);
+  }
+
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .shadow-wine {
+    box-shadow: var(--shadow-wine);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+
+  .text-wine {
+    color: hsl(var(--wine));
+  }
+
+  .bg-wine {
+    background-color: hsl(var(--wine));
+  }
+
+  .bg-gold {
+    background-color: hsl(var(--gold));
+  }
+
+  .border-gold {
+    border-color: hsl(var(--gold));
+  }
+
+  .print-thermal {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    max-width: 80mm;
+    margin: 0 auto;
+  }
+}
+
+/* ── Impressão — cada contexto condicional via classe no body ── */
+@media print {
+  /* Thermal (comprovantes do Totem) */
+  body.print-thermal > *:not(.print-thermal-root) {
+    display: none !important;
+  }
+
+  .print-thermal {
+    display: block !important;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    max-width: 80mm;
+    margin: 0 auto;
+    color: #000;
+    background: white;
+  }
+
+  .print-thermal h1, .print-thermal h2 {
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px dashed #000;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+
+  .print-thermal .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .print-thermal .total {
+    border-top: 1px dashed #000;
+    font-weight: bold;
+    font-size: 14px;
+    padding-top: 6px;
+    margin-top: 6px;
+  }
+
+  /* ── Relatório PDF ─────────────────────────────── */
+  body.print-relatorio > *:not(#relatorio-print-root) {
+    display: none !important;
+  }
+
+  body.print-relatorio #relatorio-print-root {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    overflow: visible;
+    background: white;
+    z-index: 9999;
+  }
+
+  body.print-relatorio #relatorio-print-root table tr:nth-child(even) {
+    background: #f9f5ef;
+  }
+
+  /* ── Pagamentos PDF ─────────────────────────────── */
+  body.print-pagamentos > *:not(#pagamentos-print-root) {
+    display: none !important;
+  }
+
+  body.print-pagamentos #pagamentos-print-root {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    overflow: visible;
+    background: white;
+    z-index: 9999;
+  }
+
+  /* ── Balancete PDF ─────────────────────────────── */
+  body.print-balancete * {
+    visibility: hidden !important;
+  }
+
+  body.print-balancete #balancete-print,
+  body.print-balancete #balancete-print * {
+    visibility: visible !important;
+  }
+
+  body.print-balancete #balancete-print {
+    position: fixed;
+    inset: 0;
+    overflow: visible;
+    background: white;
+    z-index: 9999;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 24px 32px !important;
+  }
+
+  body.print-balancete #balancete-print table {
+    page-break-inside: avoid;
+  }
+}
+
+/* @page padrão retrato */
+@page {
+  size: A4 portrait;
+  margin: 16mm 12mm;
+}
+
+/* Pagamentos em paisagem */
+body.print-pagamentos {
+  @page {
+    size: A4 landscape;
+    margin: 12mm 14mm;
+  }
+}
